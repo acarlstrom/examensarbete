@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Chart Stapel 7</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="chart-container" style="position: relative; height:600px; width:1200px;">
+    <canvas id="bar-chart" width="800" height="450"></canvas>
+  </div>
+  <script>
+    var scrapedData = [];
+    var helaStartTime, helaEndTime, drawStartTime, drawEndTime;
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+      }
+    };
+    xhttp.open("GET", "stockholm1.xml", true);
+    xhttp.send();
+  
+    function myFunction(xml) {
+      helaStartTime = performance.now();
+      var xmlDoc, x, z; 
+      var kat1 = 0;
+      var kat2 = 0;
+      var kat3 = 0;
+      var kat4 = 0;
+      var kat5 = 0;
+      var kat6 = 0;
+      var kat7 = 0;
+      var kat8 = 0;
+      var kat9 = 0;
+      var kat10 = 0;
+      var kat11 = 0;
+      var kat12 = 0;
+  
+      var kat1_ = 0;
+      var kat2_ = 0;
+      var kat3_ = 0;
+      var kat4_ = 0;
+      var kat5_ = 0;
+      var kat6_ = 0;
+      var kat7_ = 0;
+      var kat8_ = 0;
+      var kat9_ = 0;
+      var kat10_ = 0;
+      var kat11_ = 0;
+      var kat12_ = 0;
+      
+      var kat1_1 = 0;
+      var kat2_1 = 0;
+      var kat3_1 = 0;
+      var kat4_1 = 0;
+      var kat5_1 = 0;
+      var kat6_1 = 0;
+      var kat7_1 = 0;
+      var kat8_1 = 0;
+      var kat9_1 = 0;
+      var kat10_1 = 0;
+      var kat11_1 = 0;
+      var kat12_1 = 0;
+      
+      var kat1_2 = 0;
+      var kat2_2 = 0;
+      var kat3_2 = 0;
+      var kat4_2 = 0;
+      var kat5_2 = 0;
+      var kat6_2 = 0;
+      var kat7_2 = 0;
+      var kat8_2 = 0;
+      var kat9_2 = 0;
+      var kat10_2 = 0;
+      var kat11_2 = 0;
+      var kat12_2 = 0;
+      
+      var kat1_3 = 0;
+      var kat2_3 = 0;
+      var kat3_3 = 0;
+      var kat4_3 = 0;
+      var kat5_3 = 0;
+      var kat6_3 = 0;
+      var kat7_3 = 0;
+      var kat8_3 = 0;
+      var kat9_3 = 0;
+      var kat10_3 = 0;
+      var kat11_3 = 0;
+      var kat12_3 = 0;
+      
+      var kat1_4 = 0;
+      var kat2_4 = 0;
+      var kat3_4 = 0;
+      var kat4_4 = 0;
+      var kat5_4 = 0;
+      var kat6_4 = 0;
+      var kat7_4 = 0;
+      var kat8_4 = 0;
+      var kat9_4 = 0;
+      var kat10_4 = 0;
+      var kat11_4 = 0;
+      var kat12_4 = 0;
+      
+      var kat1_5 = 0;
+      var kat2_5 = 0;
+      var kat3_5 = 0;
+      var kat4_5 = 0;
+      var kat5_5 = 0;
+      var kat6_5 = 0;
+      var kat7_5 = 0;
+      var kat8_5 = 0;
+      var kat9_5 = 0;
+      var kat10_5 = 0;
+      var kat11_5 = 0;
+      var kat12_5 = 0;
+      
+      var kat1_6 = 0;
+      var kat2_6 = 0;
+      var kat3_6 = 0;
+      var kat4_6 = 0;
+      var kat5_6 = 0;
+      var kat6_6 = 0;
+      var kat7_6 = 0;
+      var kat8_6 = 0;
+      var kat9_6 = 0;
+      var kat10_6 = 0;
+      var kat11_6 = 0;
+      var kat12_6 = 0;
+      
+      xmlDoc = xml.responseXML;
+      x = xmlDoc.getElementsByTagName("year");
+      z = xmlDoc.getElementsByTagName("temp3");
+      for (i = 0; i < x.length; i++) { 
+        for (d = 1800; d < 1825; d++){
+          if(x[i].childNodes[0].nodeValue == d){              
+            if (z[i].childNodes[0].nodeValue <= -25){
+              kat1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+              kat2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+              kat3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+              kat4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+              kat5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+              kat6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+              kat7++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+              kat8++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+              kat9++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+              kat10++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+              kat11++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 25){
+              kat12++;
+            }
+          }
+        }
+        for (e = 1825; e < 1850; e++){
+          if (x[i].childNodes[0].nodeValue == e){
+            if (z[i].childNodes[0].nodeValue <= -25){
+              kat1_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+              kat2_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+              kat3_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+              kat4_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+              kat5_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+              kat6_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+              kat7_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+              kat8_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+              kat9_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+              kat10_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+              kat11_++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 25){
+              kat12_++;
+            } 
+          }
+        }
+        for (d = 1850; d < 1875; d++){
+          if(x[i].childNodes[0].nodeValue == d){              
+            if (z[i].childNodes[0].nodeValue <= -25){
+              kat1_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+              kat2_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+              kat3_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+              kat4_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+              kat5_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+              kat6_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+              kat7_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+              kat8_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+              kat9_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+              kat10_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+              kat11_1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 25){
+              kat12_1++;
+            }
+          }
+        }
+        for (e = 1875; e < 1900; e++){
+          if (x[i].childNodes[0].nodeValue == e){
+            if (z[i].childNodes[0].nodeValue <= -25){
+              kat1_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+              kat2_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+              kat3_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+              kat4_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+              kat5_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+              kat6_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+              kat7_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+              kat8_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+              kat9_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+              kat10_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+              kat11_2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 25){
+              kat12_2++;
+            } 
+          }
+        }
+        for (d = 1900; d < 1925; d++){
+          if(x[i].childNodes[0].nodeValue == d){              
+            if (z[i].childNodes[0].nodeValue <= -25){
+              kat1_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+              kat2_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+              kat3_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+              kat4_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+              kat5_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+              kat6_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+              kat7_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+              kat8_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+              kat9_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+              kat10_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+              kat11_3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 25){
+              kat12_3++;
+            }
+          }
+        }
+        for (e = 1925; e < 1950; e++){
+          if (x[i].childNodes[0].nodeValue == e){
+            if (z[i].childNodes[0].nodeValue <= -25){
+              kat1_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+              kat2_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+              kat3_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+              kat4_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+              kat5_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+              kat6_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+              kat7_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+              kat8_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+              kat9_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+              kat10_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+              kat11_4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 25){
+              kat12_4++;
+            } 
+          }
+        }
+        for (d = 1950; d < 1975; d++){
+          if(x[i].childNodes[0].nodeValue == d){              
+            if (z[i].childNodes[0].nodeValue <= -25){
+              kat1_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+              kat2_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+              kat3_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+              kat4_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+              kat5_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+              kat6_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+              kat7_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+              kat8_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+              kat9_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+              kat10_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+              kat11_5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 25){
+              kat12_5++;
+            }
+          }
+        }
+        for (e = 1975; e < 2000; e++){
+          if (x[i].childNodes[0].nodeValue == e){
+            if (z[i].childNodes[0].nodeValue <= -25){
+              kat1_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+              kat2_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+              kat3_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+              kat4_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+              kat5_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+              kat6_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+              kat7_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+              kat8_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+              kat9_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+              kat10_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+              kat11_6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 25){
+              kat12_6++;
+            } 
+          }
+        }
+      }
+
+      drawStartTime = performance.now();
+      new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+          datasets: [{
+            label: '1800-1825',
+            data: [kat1, kat2, kat3, kat4, kat5, kat6, kat7, kat8, kat9, kat10, kat11, kat12],
+            borderColor: "#c63939",
+            backgroundColor: "#c63939"
+          }, {
+            label: '1825-1850',
+            data: [kat1_, kat2_, kat3_, kat4_, kat5_, kat6_, kat7_, kat8_, kat9_, kat10_, kat11_, kat12_],
+            borderColor: "#c67939",
+            backgroundColor: "#c67939"
+          },{
+            label: '1850-1875',
+            data: [kat1_1, kat2_1, kat3_1, kat4_1, kat5_1, kat6_1, kat7_1, kat8_1, kat9_1, kat10_1, kat11_1, kat12_1],
+            borderColor: "#2e9e2e",
+            backgroundColor: "#2e9e2e"
+          }, {
+            label: '1875-1900',
+            data: [kat1_2, kat2_2, kat3_2, kat4_2, kat5_2, kat6_2, kat7_2, kat8_2, kat9_2, kat10_2, kat11_2, kat12_2],
+            borderColor: "#227777",
+            backgroundColor: "#227777"
+          },{
+            label: '1900-1925',
+            data: [kat1_3, kat2_3, kat3_3, kat4_3, kat5_3, kat6_3, kat7_3, kat8_3, kat9_3, kat10_3, kat11_3, kat12_3],
+            borderColor: "#FF5858",
+            backgroundColor: "#FF5858"
+          }, {
+            label: '1925-1950',
+            data: [kat1_4, kat2_4, kat3_4, kat4_4, kat5_4, kat6_4, kat7_4, kat8_4, kat9_4, kat10_4, kat11_4, kat12_4],
+            borderColor: "#FFA458",
+            backgroundColor: "#FFA458"
+          },{
+            label: '1950-1975',
+            data: [kat1_5, kat2_5, kat3_5, kat4_5, kat5_5, kat6_5, kat7_5, kat8_5, kat9_5, kat10_5, kat11_5, kat12_5],
+            borderColor: "#55F855",
+            backgroundColor: "#55F855"
+          }, {
+            label: '1975-2000',
+            data: [kat1_6, kat2_6, kat3_6, kat4_6, kat5_6, kat6_6, kat7_6, kat8_6, kat9_6, kat10_6, kat11_6, kat12_6],
+            borderColor: "#53F1F1",
+            backgroundColor: "#53F1F1"
+          }],
+          labels: ['Kallare än -25', '-25 <-> -20', '-20 <-> -15', '-15 <-> -10', '-10 <-> -5', '-5 <-> 0', '0 <-> 5', '5 <-> 10', '10 <-> 15', '15 <-> 20', '20 <-> 25', 'Varmare än 25']
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Temperaturer i Stockholm - 1800-2000'
+          }
+        }
+      });
+      drawEndTime = performance.now();
+      helaEndTime = performance.now();
+      toTextFile();
+    }
+    
+    function toTextFile(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {}
+      };
+      scrapedData.push(helaStartTime);
+      scrapedData.push(helaEndTime);
+      scrapedData.push(drawStartTime);
+      scrapedData.push(drawEndTime);
+      xhttp.open("POST", "http://wwwlab.iit.his.se/a15alica/examensarbete/results/ChartStapel7.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("str=" + scrapedData + "\r\n");
+      location.reload();
+    }
+  </script>
+</body>
+</html>

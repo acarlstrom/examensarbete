@@ -1,0 +1,139 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Google Charts Stapel 4</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+  <div id="chart_div" style="width: 1200px; height: 600px;"></div>
+  <script>
+    var scrapedData = [];
+    var helaStartTime, helaEndTime, drawStartTime, drawEndTime;
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+      }
+    };
+    xhttp.open("GET", "stockholm1.xml", true);
+    xhttp.send();
+
+    function myFunction(xml) {
+      helaStartTime = performance.now();
+      var xmlDoc, x, y, z;
+
+      var kat1 = 0;
+      var kat2 = 0;
+      var kat3 = 0;
+      var kat4 = 0;
+      var kat5 = 0;
+      var kat6 = 0;
+      var kat7 = 0;
+      var kat8 = 0;
+      var kat9 = 0;
+      var kat10 = 0;
+      var kat11 = 0;
+      var kat12 = 0;
+
+      xmlDoc = xml.responseXML;
+      x = xmlDoc.getElementsByTagName("year");
+      z = xmlDoc.getElementsByTagName("temp3");
+      for (i = 0; i < x.length; i++) {
+        for (d = 1800; d < 2000; d++){
+          if(x[i].childNodes[0].nodeValue == d){
+            if (z[i].childNodes[0].nodeValue <= -25){
+              kat1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+              kat2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+              kat3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+              kat4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+              kat5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+              kat6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+              kat7++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+              kat8++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+              kat9++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+              kat10++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+              kat11++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 25){
+              kat12++;
+            }
+          }
+        }
+      }
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('string', 'Temp');
+        data.addColumn('number', 'Antal 1800-2000');
+        data.addRow(["Kallare än -25", kat1]);
+      	data.addRow(["-25 <-> -20", kat2]);
+      	data.addRow(["-20 <-> -15", kat3]);
+      	data.addRow(["-15 <-> -10", kat4]);
+      	data.addRow(["-10 <-> -5", kat5]);
+      	data.addRow(["-5 <-> 0", kat6]);
+      	data.addRow(["0 <-> 5", kat7]);
+      	data.addRow(["5 <-> 10", kat8]);
+      	data.addRow(["10 <-> 15", kat9]);
+      	data.addRow(["15 <-> 20", kat10]);
+      	data.addRow(["20 <-> 25", kat11]);
+      	data.addRow(["Varmare än 25", kat12]);
+
+        var options = {
+          title: 'Temperaturer Stockholm 1800-2000',
+          legend: 'none',
+          colors: ['#009933'],
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+
+        drawStartTime = performance.now();
+        chart.draw(data, options);
+        drawEndTime = performance.now();
+        helaEndTime = performance.now();
+        toTextFile();
+      }
+    }
+    
+    function toTextFile(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {}
+      };
+      scrapedData.push(helaStartTime);
+      scrapedData.push(helaEndTime);
+      scrapedData.push(drawStartTime);
+      scrapedData.push(drawEndTime);
+      xhttp.open("POST", "http://wwwlab.iit.his.se/a15alica/examensarbete/results/GoogleStapel4.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("str=" + scrapedData + "\r\n");
+      location.reload();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chart Punkt 1 - Nej</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+</head>
+<body>
+  <div class="chart-container" style="position: relative; height:600px; width:1200px;">
+    <canvas id="line-chart" width="800" height="450"></canvas>
+  </div>
+  <script>
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+      }
+    };
+    xhttp.open("GET", "stockholm1.xml", true);
+    xhttp.send();
+  
+    function myFunction(xml) {
+      var xmlDoc = xml.responseXML;
+      
+      new Chart(document.getElementById("line-chart"), {
+        type: 'scatter',
+        data: {
+          datasets: [{ 
+            label: 'Jan 1900',
+            data: [{
+              x: 1,
+              y: 0.7
+            }, {
+              x: 2,
+              y: -2.7
+            }, {
+              x: 3,
+              y: -1.1
+            }, {
+              x: 4,
+              y: -8.0
+            }, {
+              x: 5,
+              y: -8.2
+            }, {
+              x: 6,
+              y: -9.2
+            }, {
+              x: 7,
+              y: -5.6
+            }, {
+              x: 8,
+              y: -3.5
+            }, {
+              x: 9,
+              y: -1.1
+            }, {
+              x: 10,
+              y: 0.0
+            }, {
+              x: 11,
+              y: -2.3
+            }, {
+              x: 12,
+              y: -5.9
+            }, {
+              x: 13,
+              y: -8.6
+            }, {
+              x: 14,
+              y: -7.5
+            }, {
+              x: 15,
+              y: -5.4
+            }, {
+              x: 16,
+              y: -1.2
+            }, {
+              x: 17,
+              y: -1.2
+            }, {
+              x: 18,
+              y: -2.3
+            }, {
+              x: 19,
+              y: -6.5
+            }, {
+              x: 20,
+              y: -1.4
+            }, {
+              x: 21,
+              y: -2.9
+            }, {
+              x: 22,
+              y: 0.2
+            }, {
+              x: 23,
+              y: 3.3
+            }, {
+              x: 24,
+              y: -0.8
+            }, {
+              x: 25,
+              y: -3.4
+            }, {
+              x: 26,
+              y: -2.1
+            }, {
+              x: 27,
+              y: -1.0
+            }, {
+              x: 28,
+              y: -0.1
+            }, {
+              x: 29,
+              y: -1.5
+            }, {
+              x: 30,
+              y: -4.0
+            }, {
+              x: 31,
+              y: -6.7
+            }]
+          }]
+        },
+        options: {
+          scales: {
+            xAxes: [{
+              type: 'linear',
+              position: 'bottom'
+            }]
+          },
+          title: {
+            display: true,
+            text: 'Temperaturer i Stockholm - Jan 1900'
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

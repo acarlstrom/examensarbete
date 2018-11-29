@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chart Punkt 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="chart-container" style="position: relative; height:600px; width:1200px;">
+    <canvas id="scatter" width="800" height="450"></canvas>
+  </div>
+  <script>
+    var scrapedData = [];
+    var helaStartTime, helaEndTime, drawStartTime, drawEndTime;
+  
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+      }
+    };
+    xhttp.open("GET", "stockholm1.xml", true);
+    xhttp.send();
+  
+    function myFunction(xml) {
+      helaStartTime = performance.now();
+      var xmlDoc, txt, count, c, x, z, txt1; 
+      xmlDoc = xml.responseXML;
+      txt = [];
+      count = [];
+      c = 1;
+      x = xmlDoc.getElementsByTagName("year");
+      z = xmlDoc.getElementsByTagName("temp3");
+      for (i = 0; i < x.length; i++) { 
+        if(x[i].childNodes[0].nodeValue == "1900"){
+          txt1 = z[i].childNodes[0].nodeValue;
+          txt.push(txt1);
+          count.push(c);
+          c++;
+        }
+      }
+
+      drawStartTime = performance.now();
+      new Chart(document.getElementById("scatter"), {
+        type: 'line',
+        data: {
+          labels: count,
+          datasets: [{ 
+            data: txt,
+            label: "1900",
+            borderColor: "#c63939",
+            pointBackgroundColor: "#c63939",
+            showLine: false,
+            fill: false
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Temperaturer i Stockholm - 1900'
+          }
+        }
+      });
+      drawEndTime = performance.now();
+      helaEndTime = performance.now();
+      toTextFile();
+    }
+    
+    function toTextFile(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {}
+      };
+      scrapedData.push(helaStartTime);
+      scrapedData.push(helaEndTime);
+      scrapedData.push(drawStartTime);
+      scrapedData.push(drawEndTime);
+      xhttp.open("POST", "http://wwwlab.iit.his.se/a15alica/examensarbete/results/ChartPunkt2.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("str=" + scrapedData + "\r\n");
+      location.reload();
+    }
+  </script>
+</body>
+</html>

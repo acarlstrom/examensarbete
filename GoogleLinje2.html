@@ -1,0 +1,94 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Google Charts Linje 2</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+  <div id="chart_div" style="width: 1200px; height: 600px;"></div>
+  <script>
+    var scrapedData = [];
+    var helaStartTime, helaEndTime, drawStartTime, drawEndTime;
+  
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+      }
+    };
+    xhttp.open("GET", "stockholm1.xml", true);
+    xhttp.send();
+    
+    function myFunction(xml) {
+      helaStartTime = performance.now();
+      var xmlDoc, arr, txt, count, c, x, z, txt1;
+      xmlDoc = xml.responseXML;
+      arr = [];
+      txt = [];
+      count = [];
+      c = 1;
+      x = xmlDoc.getElementsByTagName("year");
+      z = xmlDoc.getElementsByTagName("temp3");
+      for (i = 0; i < x.length; i++) {
+        if(x[i].childNodes[0].nodeValue == "1900"){
+          txt1 = z[i].childNodes[0].nodeValue;
+          var a = parseFloat (txt1);
+          txt.push(a);
+          count.push(c);
+          c++;
+        }
+      }
+
+      for (i=0; i<count.length; i++) {
+        var partarr = [];
+        partarr.push(count[i]);
+        partarr.push(txt[i]);
+        arr.push(partarr);
+      }
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('number', 'Dag');
+        data.addColumn('number', 'temp');
+        data.addRows(arr);
+
+        var options = {
+          title: 'Temperaturer Stockholm 1900',
+          hAxis: {title: 'Dag', minValue: 0, maxValue: 367},
+          vAxis: {title: 'Temperatur (Celsius)', minValue: 0, maxValue: 25},
+          legend: 'none',
+          colors: ['#009933'],
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        
+        drawStartTime = performance.now();
+        chart.draw(data, options);
+        drawEndTime = performance.now();
+        helaEndTime = performance.now();
+        toTextFile();
+      }
+    }
+    
+    function toTextFile(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {}
+      };
+      scrapedData.push(helaStartTime);
+      scrapedData.push(helaEndTime);
+      scrapedData.push(drawStartTime);
+      scrapedData.push(drawEndTime);
+      xhttp.open("POST", "http://wwwlab.iit.his.se/a15alica/examensarbete/results/GoogleLinje2.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("str=" + scrapedData + "\r\n");
+      location.reload();
+    }
+  </script>
+</body>
+</html>

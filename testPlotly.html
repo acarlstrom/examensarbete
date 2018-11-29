@@ -1,0 +1,33 @@
+<head>
+  <meta charset="utf-8">
+  <title>Plotly Ursprungsfil</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <div id="myDiv"></div>
+  <script>
+    var trace1 = {
+      x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+      y: [0.7, -2.7, -1.1, -8.0, -8.2, -9.2, -5.6, -3.5, -1.1, 0.0, -2.3, -5.9, -8.6, -7.5, -5.4, -1.2, -1.2, -2.3, -6.5, -1.4, -2.9, 0.2, 3.3, -0.8, -3.4, -2.1, -1.0, -0.1, -1.5, -4.0, -6.7],
+      mode: 'markers',
+      type: 'scatter',
+      name: 'Team A',
+      text: ['1 jan', '2 jan', '3 jan', '4 jan', '5 jan', '6 jan', '7 jan', '8 jan', '9 jan', '10 jan', '11 jan', '12 jan', '13 jan', '14 jan', '15 jan', '16 jan', '17 jan', '18 jan', '19 jan', '20 jan', '21 jan', '22 jan', '23 jan', '24 jan', '25 jan', '26 jan', '27 jan', '28 jan', '29 jan', '30 jan', '31 jan'],
+      marker: { size: 12 }
+    };
+
+    var data = [ trace1 ];
+
+    var layout = {
+      xaxis: {
+        range: [ 0, 32 ]
+      },
+      yaxis: {
+        range: [-12, 12]
+      },
+      title:'Temperaturer Stockholm januari 1900'
+    };
+
+    Plotly.newPlot('myDiv', data, layout);
+  </script>
+</body>

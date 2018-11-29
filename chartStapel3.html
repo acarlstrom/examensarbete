@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Chart Stapel 3</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="chart-container" style="position: relative; height:600px; width:1200px;">
+    <canvas id="bar-chart" width="800" height="450"></canvas>
+  </div>
+  <script>
+    var scrapedData = [];
+    var helaStartTime, helaEndTime, drawStartTime, drawEndTime;
+  
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+      }
+    };
+    xhttp.open("GET", "stockholm1.xml", true);
+    xhttp.send();
+  
+    function myFunction(xml) {
+      helaStartTime = performance.now();
+      var xmlDoc, x, z; 
+      var kat1 = 0;
+      var kat2 = 0;
+      var kat3 = 0;
+      var kat4 = 0;
+      var kat5 = 0;
+      var kat6 = 0;
+      var kat7 = 0;
+      var kat8 = 0;
+      var kat9 = 0;
+      var kat10 = 0;
+      var kat11 = 0;
+      var kat12 = 0;
+      xmlDoc = xml.responseXML;
+      x = xmlDoc.getElementsByTagName("year");
+      z = xmlDoc.getElementsByTagName("temp3");
+      for (i = 0; i < x.length; i++) { 
+        for (d = 1900; d < 2000; d++){
+          if(x[i].childNodes[0].nodeValue == d){
+            if (z[i].childNodes[0].nodeValue <= -25){
+              kat1++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+              kat2++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+              kat3++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+              kat4++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+              kat5++;
+            }
+            else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+              kat6++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+              kat7++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+              kat8++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+              kat9++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+              kat10++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+              kat11++;
+            }
+            else if (z[i].childNodes[0].nodeValue > 25){
+              kat12++;
+            }
+          }
+        }
+      }
+
+      drawStartTime = performance.now();
+      new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+          datasets: [{
+            data: [kat1, kat2, kat3, kat4, kat5, kat6, kat7, kat8, kat9, kat10, kat11, kat12],
+            label: "1900-2000",
+            borderColor: "#c63939",
+            backgroundColor: "#c63939"
+          }],
+          labels: ['Kallare än -25', '-25 <-> -20', '-20 <-> -15', '-15 <-> -10', '-10 <-> -5', '-5 <-> 0', '0 <-> 5', '5 <-> 10', '10 <-> 15', '15 <-> 20', '20 <-> 25', 'Varmare än 25']
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Temperaturer i Stockholm - 1900-2000'
+          }
+        }
+      });
+      drawEndTime = performance.now();
+      helaEndTime = performance.now();
+      toTextFile();
+    }
+    
+    function toTextFile(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {}
+      };
+      scrapedData.push(helaStartTime);
+      scrapedData.push(helaEndTime);
+      scrapedData.push(drawStartTime);
+      scrapedData.push(drawEndTime);
+      xhttp.open("POST", "http://wwwlab.iit.his.se/a15alica/examensarbete/results/ChartStapel3.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("str=" + scrapedData + "\r\n");
+      location.reload();
+    }
+  </script>
+</body>
+</html>
